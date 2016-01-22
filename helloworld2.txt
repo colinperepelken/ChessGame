@@ -1,5 +1,0 @@
-class World{
-public static main(String[] args){
-	System.out.prinln("better hello ;)")
-	}
-}
