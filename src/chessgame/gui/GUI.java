@@ -3,12 +3,14 @@ package chessgame.gui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
-	private static final int FRAME_WIDTH = 400;
-	private static final int FRAME_HEIGHT = 300;
+	private static final int FRAME_WIDTH = 600;
+	private static final int FRAME_HEIGHT = 600;
 	
 	private GridPane root = new GridPane();
 	
@@ -16,7 +18,13 @@ public class GUI extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Chess Game");
 		
-		// init board
+		initBoard();
+		
+		primaryStage.setScene(new Scene(root, FRAME_WIDTH, FRAME_HEIGHT));
+		primaryStage.show();
+	}
+	
+	private void initBoard() {
 		for(int row = 0; row < 8; row++) {
 			for(int col = 0; col < 8; col++) {
 				Button square = new Button();
@@ -26,15 +34,23 @@ public class GUI extends Application {
 				} else {
 					color = "#000000"; // black
 				}
-				square.setStyle("-fx-base: " + color); // set button color using CSS
+				
+				Image img = new Image(getClass().getResourceAsStream("/res/rookw.png"));
+				square.setGraphic(new ImageView(img));
+				// CSS styling of button
+				square.setStyle(
+						"-fx-base: " + color + ";" // sets color
+						+"-fx-background-insets: 0;" // removes shadow
+						+"-fx-background-radius: 0;"); // removes rounded corners
 				// set button sizes
-				square.setMinHeight(50);
-				square.setMinWidth(50);
+				square.setMinHeight(70);
+				square.setMinWidth(70);
+				square.setMaxHeight(70);
+				square.setMaxWidth(70);
+			
 				root.add(square, col, row);
 			}
 		}
-		primaryStage.setScene(new Scene(root, FRAME_WIDTH, FRAME_HEIGHT));
-		primaryStage.show();
 	}
 
 	public static void main(String[] args) {
