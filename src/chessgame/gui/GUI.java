@@ -14,12 +14,18 @@ public class GUI extends Application {
 	private static final String TITLE = "Chess Game";
 	
 	private GridPane root = new GridPane();
+	private Button[][] buttons; // 8x8 buttons
+	
+	// IMAGES for pieces
+	private static Image pawnw, rookw, knightw, bishopw, kingw, queenw,
+						pawnb, rookb, knightb, bishopb, kingb, queenb;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/pawnb.png"))); // set application icon
 		
+		loadImages();
 		initBoard();
 		
 		primaryStage.setScene(new Scene(root, FRAME_WIDTH, FRAME_HEIGHT));
@@ -27,6 +33,7 @@ public class GUI extends Application {
 	}
 	
 	private void initBoard() {
+		buttons = new Button[8][8];
 		for(int row = 0; row < 8; row++) {
 			for(int col = 0; col < 8; col++) {
 				Button square = new Button();
@@ -36,7 +43,7 @@ public class GUI extends Application {
 				} else {
 					color = "#595959"; // black
 				}
-				
+				// set images
 				square.setGraphic(new ImageView(getPieceImage(row, col)));
 				// CSS styling of button
 				square.setStyle(
@@ -48,7 +55,11 @@ public class GUI extends Application {
 				square.setMinWidth(70);
 				square.setMaxHeight(70);
 				square.setMaxWidth(70);
-			
+				
+				// add event handler to button
+				square.setOnAction(new Handler());
+				
+				buttons[row][col] = square; // save button in array
 				root.add(square, col, row);
 			}
 		}
@@ -57,26 +68,41 @@ public class GUI extends Application {
 	private Image getPieceImage(int row, int col) {
 		Image img = null;
 		if(row == 1) {
-			img = new Image(getClass().getResourceAsStream("/res/pawnb.png"));
+			img = pawnb;
 		} else if(row == 6) {
-			img = new Image(getClass().getResourceAsStream("/res/pawnw.png"));
+			img = pawnw;
 		} else if(row == 7) {
-			if(col == 0 || col == 7) img = new Image(getClass().getResourceAsStream("/res/rookw.png"));
-			if(col == 1 || col == 6) img = new Image(getClass().getResourceAsStream("/res/knightw.png"));
-			if(col == 2 || col == 5) img = new Image(getClass().getResourceAsStream("/res/bishopw.png"));
-			if(col == 3) img = new Image(getClass().getResourceAsStream("/res/queenw.png"));
-			if(col == 4) img = new Image(getClass().getResourceAsStream("/res/kingw.png"));
+			if(col == 0 || col == 7) img = rookw;
+			if(col == 1 || col == 6) img = knightw;
+			if(col == 2 || col == 5) img = bishopw;
+			if(col == 3) img = queenw;
+			if(col == 4) img = kingw;
 		} else if(row == 0) {
-			if(col == 0 || col == 7) img = new Image(getClass().getResourceAsStream("/res/rookb.png"));
-			if(col == 1 || col == 6) img = new Image(getClass().getResourceAsStream("/res/knightb.png"));
-			if(col == 2 || col == 5) img = new Image(getClass().getResourceAsStream("/res/bishopb.png"));
-			if(col == 3) img = new Image(getClass().getResourceAsStream("/res/queenb.png"));
-			if(col == 4) img = new Image(getClass().getResourceAsStream("/res/kingb.png"));
+			if(col == 0 || col == 7) img = rookb;
+			if(col == 1 || col == 6) img = knightb;
+			if(col == 2 || col == 5) img = bishopb;
+			if(col == 3) img = queenb;
+			if(col == 4) img = knightb;
 		}
 			
 		
 		// default return null... should exception handle
 		return img;
+	}
+	
+	private void loadImages() {
+		pawnw = new Image(getClass().getResourceAsStream("/res/pawnw.png"));
+		pawnb = new Image(getClass().getResourceAsStream("/res/pawnb.png"));
+		rookw = new Image(getClass().getResourceAsStream("/res/rookw.png"));
+		rookb = new Image(getClass().getResourceAsStream("/res/rookb.png"));
+		knightw = new Image(getClass().getResourceAsStream("/res/knightw.png"));
+		knightb = new Image(getClass().getResourceAsStream("/res/knightb.png"));
+		bishopw = new Image(getClass().getResourceAsStream("/res/bishopw.png"));
+		bishopb = new Image(getClass().getResourceAsStream("/res/bishopb.png"));
+		kingw = new Image(getClass().getResourceAsStream("/res/kingw.png"));
+		kingb = new Image(getClass().getResourceAsStream("/res/kingb.png"));
+		queenw = new Image(getClass().getResourceAsStream("/res/queenw.png"));
+		queenb = new Image(getClass().getResourceAsStream("/res/queenb.png"));
 	}
 
 	public static void main(String[] args) {
