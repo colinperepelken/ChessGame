@@ -21,7 +21,9 @@ public class Square extends Button{
 	private void setPiece(Piece p){
 		this.piece = p;
 	}
+
 	private boolean checkOccupied(){
 		return piece!=null;
 	}
+
 }

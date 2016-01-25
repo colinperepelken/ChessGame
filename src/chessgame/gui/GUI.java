@@ -1,12 +1,15 @@
 package chessgame.gui;
 
+import chessgame.Square;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 
 public class GUI extends Application {
 	private static final int FRAME_WIDTH = 600;
@@ -14,7 +17,7 @@ public class GUI extends Application {
 	private static final String TITLE = "Chess Game";
 	
 	private GridPane root = new GridPane();
-	private Button[][] buttons; // 8x8 buttons
+	private Square[][] squares; // 8x8 buttons
 	
 	// IMAGES for pieces
 	private static Image pawnw, rookw, knightw, bishopw, kingw, queenw,
@@ -33,10 +36,10 @@ public class GUI extends Application {
 	}
 	
 	private void initBoard() {
-		buttons = new Button[8][8];
+		squares = new Square[8][8];
 		for(int row = 0; row < 8; row++) {
 			for(int col = 0; col < 8; col++) {
-				Button square = new Button();
+				Square square = new Square(Color.BLACK);
 				String color;
 				if((row + col) % 2 == 0) {
 					color = "#f2f2f2"; // white
@@ -59,7 +62,7 @@ public class GUI extends Application {
 				// add event handler to button
 				square.setOnAction(new Handler());
 				
-				buttons[row][col] = square; // save button in array
+				squares[row][col] = square; // save button in array
 				root.add(square, col, row);
 			}
 		}
@@ -82,7 +85,7 @@ public class GUI extends Application {
 			if(col == 1 || col == 6) img = knightb;
 			if(col == 2 || col == 5) img = bishopb;
 			if(col == 3) img = queenb;
-			if(col == 4) img = knightb;
+			if(col == 4) img = kingb;
 		}
 			
 		
