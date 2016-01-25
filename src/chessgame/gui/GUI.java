@@ -2,7 +2,6 @@ package chessgame.gui;
 
 import chessgame.Square;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -75,7 +74,7 @@ public class GUI extends Application {
 		} else if(row == 6) {
 			img = pawnw;
 		} else if(row == 7) {
-			if(col == 0 || col == 7) img = rookw;
+			if(col == 0 || col == 7) img = rookw; squares[row][col].set
 			if(col == 1 || col == 6) img = knightw;
 			if(col == 2 || col == 5) img = bishopw;
 			if(col == 3) img = queenw;

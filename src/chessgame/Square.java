@@ -15,16 +15,16 @@ public class Square extends Button{
 	}
 	
 	public Square(Color color, Piece piece) {
-		this.color = color;
+		this(color);
 		setPiece(piece);
 	}
 	
-	private void setPiece(Piece p){
-		this.piece = p;
+	private void setPiece(Piece piece){
+		this.piece = piece;
 	}
 
-	private boolean checkOccupied(){
-		return piece!=null;
+	private boolean isOccupied(){
+		return piece != null;
 	}
 
 }
