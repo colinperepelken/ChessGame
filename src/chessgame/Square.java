@@ -13,6 +13,7 @@ public class Square extends Button{
 	public Square(Color color){
 		this.color = color;
 	}
+	
 	public Square(Color color, Piece piece) {
 		this.color = color;
 		setPiece(piece);
