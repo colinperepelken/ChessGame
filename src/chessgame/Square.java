@@ -17,7 +17,5 @@ public class Square extends Button{
 	private void setOccupied(boolean s){
 		isOccupied = s;
 	}
-	private boolean checkOccupied(){
-		
-	}
+
 }
