@@ -1,8 +1,9 @@
 package chessgame;
 
-import java.awt.Color;
+
 
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import chessgame.pieces.Piece;
 
 public class Square extends Button{
@@ -14,7 +15,7 @@ public class Square extends Button{
 	}
 	public Square(Color color, Piece piece) {
 		this.color = color;
-		this.piece = piece;
+		setPiece(piece);
 	}
 	
 	private void setPiece(Piece p){
