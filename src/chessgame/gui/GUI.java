@@ -1,6 +1,7 @@
 package chessgame.gui;
 
 import chessgame.Square;
+import chessgame.pieces.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -45,8 +46,13 @@ public class GUI extends Application {
 				} else {
 					color = "#595959"; // black
 				}
+				
+				// set piece to square
+				square.setPiece(Piece.loadPiece(row, col));
 				// set images
-				square.setGraphic(new ImageView(getPieceImage(row, col)));
+				if(square.isOccupied()) {
+					square.setGraphic(new ImageView(square.getPiece().getImage()));
+				}
 				// CSS styling of button
 				square.setStyle(
 						"-fx-base: " + color + ";" // sets color
@@ -60,36 +66,10 @@ public class GUI extends Application {
 				
 				// add event handler to button
 				square.setOnAction(new Handler());
-				
 				squares[row][col] = square; // save button in array
 				root.add(square, col, row);
 			}
 		}
-	}
-	
-	private Image getPieceImage(int row, int col) {
-		Image img = null;
-		if(row == 1) {
-			img = pawnb;
-		} else if(row == 6) {
-			img = pawnw;
-		} else if(row == 7) {
-			if(col == 0 || col == 7) img = rookw; 
-			if(col == 1 || col == 6) img = knightw;
-			if(col == 2 || col == 5) img = bishopw;
-			if(col == 3) img = queenw;
-			if(col == 4) img = kingw;
-		} else if(row == 0) {
-			if(col == 0 || col == 7) img = rookb;
-			if(col == 1 || col == 6) img = knightb;
-			if(col == 2 || col == 5) img = bishopb;
-			if(col == 3) img = queenb;
-			if(col == 4) img = kingb;
-		}
-			
-		
-		// default return null... should exception handle
-		return img;
 	}
 	
 	private void loadImages() {
