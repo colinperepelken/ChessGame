@@ -17,18 +17,12 @@ public class GUI extends Application {
 	private static final String TITLE = "Chess Game";
 	
 	private GridPane root = new GridPane();
-	private Square[][] squares; // 8x8 buttons
-	
-	// IMAGES for pieces
-	private static Image pawnw, rookw, knightw, bishopw, kingw, queenw,
-						pawnb, rookb, knightb, bishopb, kingb, queenb;
-	
+
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
 		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/pawnb.png"))); // set application icon
 		
-		loadImages();
 		initBoard();
 		
 		primaryStage.setScene(new Scene(root, FRAME_WIDTH, FRAME_HEIGHT));
@@ -36,10 +30,9 @@ public class GUI extends Application {
 	}
 	
 	private void initBoard() {
-		squares = new Square[8][8];
 		for(int row = 0; row < 8; row++) {
 			for(int col = 0; col < 8; col++) {
-				Square square = new Square(Color.BLACK);
+				Square square = new Square(Color.BLACK, row, col);
 				String color;
 				if((row + col) % 2 == 0) {
 					color = "#f2f2f2"; // white
@@ -64,27 +57,12 @@ public class GUI extends Application {
 				square.setMaxHeight(70);
 				square.setMaxWidth(70);
 				
+				
 				// add event handler to button
 				square.setOnAction(new Handler());
-				squares[row][col] = square; // save button in array
 				root.add(square, col, row);
 			}
 		}
-	}
-	
-	private void loadImages() {
-		pawnw = new Image(getClass().getResourceAsStream("/res/pawnw.png"));
-		pawnb = new Image(getClass().getResourceAsStream("/res/pawnb.png"));
-		rookw = new Image(getClass().getResourceAsStream("/res/rookw.png"));
-		rookb = new Image(getClass().getResourceAsStream("/res/rookb.png"));
-		knightw = new Image(getClass().getResourceAsStream("/res/knightw.png"));
-		knightb = new Image(getClass().getResourceAsStream("/res/knightb.png"));
-		bishopw = new Image(getClass().getResourceAsStream("/res/bishopw.png"));
-		bishopb = new Image(getClass().getResourceAsStream("/res/bishopb.png"));
-		kingw = new Image(getClass().getResourceAsStream("/res/kingw.png"));
-		kingb = new Image(getClass().getResourceAsStream("/res/kingb.png"));
-		queenw = new Image(getClass().getResourceAsStream("/res/queenw.png"));
-		queenb = new Image(getClass().getResourceAsStream("/res/queenb.png"));
 	}
 
 	public static void main(String[] args) {
