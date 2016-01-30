@@ -49,5 +49,5 @@ public abstract class Piece {
 	public abstract Image getImage();
 	public abstract boolean isValidMove(int originRow, int originCol, int destRow, int destCol);
 	public void setColor(Color color) { this.color = color; }
-	public Color getcolor() { return color; }
+	public Color getColor() { return color; }
 }
