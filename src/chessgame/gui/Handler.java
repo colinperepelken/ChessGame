@@ -13,16 +13,16 @@ public class Handler implements EventHandler<ActionEvent> {
 		Square square = (Square) e.getSource();
 		if(selectedSquare == null && square.isOccupied()) {
 			selectedSquare = square;
-			if(selectedSquare.getColor().equals("BLACK")) {
+			if(selectedSquare.isBlack()) {
 				selectedSquare.setStyle(Style.BLACK_SQUARE_SELECTED);
-			} else {
+			} else if(selectedSquare.isWhite()){
 				selectedSquare.setStyle(Style.WHITE_SQUARE_SELECTED);
 			}
 		} else if(selectedSquare != null){
 			
-			if(selectedSquare.getColor().equals("BLACK")) {
+			if(selectedSquare.isBlack()) {
 				selectedSquare.setStyle(Style.BLACK_SQUARE);
-			} else {
+			} else if(selectedSquare.isWhite()){
 				selectedSquare.setStyle(Style.WHITE_SQUARE);
 			}
 			

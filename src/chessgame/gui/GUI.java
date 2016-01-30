@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -36,10 +35,8 @@ public class GUI extends Application {
 				// determine if black or white square
 				if((row + col) % 2 == 0) {
 					square.setStyle(Style.WHITE_SQUARE); // white
-					square.setColor("WHITE");
 				} else {
 					square.setStyle(Style.BLACK_SQUARE); // black
-					square.setColor("BLACK");
 				}
 				
 				// set piece to square

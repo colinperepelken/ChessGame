@@ -1,11 +1,11 @@
 package chessgame;
 
+import chessgame.gui.Style;
 import chessgame.pieces.Piece;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
 public class Square extends Button{
-	private String color; // black or white square
 	private Piece piece; // should be null if square is unoccupied
 	private int row, col;
 	
@@ -36,12 +36,21 @@ public class Square extends Button{
 		return piece != null;
 	}
 	
+	public boolean isWhite() {
+		if(getStyle().contains(Style.WHITE_HEX))
+			return true;
+		return false;
+	}
+	
+	public boolean isBlack() {
+		if(getStyle().contains(Style.BLACK_HEX))
+			return true;
+		return false;
+	}
 	
 	// getters and setters
 	public int getRow() { return row; }
 	public int getCol() { return col; }
 	public void setRow(int row) { this.row = row; }
 	public void setCol(int col) { this.col = col; }
-	public String getColor() { return color; }
-	public void setColor(String color) { this.color = color; }
 }
