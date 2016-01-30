@@ -5,7 +5,6 @@ import javafx.scene.paint.Color;
 
 public abstract class Piece {
 	protected Color color; // black or white
-	private int row, col; // location of the piece
 	
 	// constructor to set color of piece
 	public Piece(Color color) {
@@ -51,10 +50,4 @@ public abstract class Piece {
 	public abstract boolean isValidMove(int originRow, int originCol, int destRow, int destCol);
 	public void setColor(Color color) { this.color = color; }
 	public Color getcolor() { return color; }
-	
-	// row and column getters and setters
-	public int getRow() { return row; }
-	public int getCol() { return col; }
-	public void setRow(int row) { this.row = row; }
-	public void setCol(int col) { this.col = col; }
 }

@@ -11,17 +11,27 @@ public class Handler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent e) {
 		Square square = (Square) e.getSource();
-		
-		if(selectedSquare == null) {
+		if(selectedSquare == null && square.isOccupied()) {
 			selectedSquare = square;
-			//square.setStyle("-fx-base: #a5e763"); // temp
-		} else {
-			if(selectedSquare.isOccupied()) {
-				System.out.println(selectedSquare.getPiece()
-						.isValidMove(selectedSquare.getRow(), selectedSquare.getCol(), 
-								square.getRow(), square.getCol()));
-				selectedSquare = null; // clear
+			if(selectedSquare.getColor().equals("BLACK")) {
+				selectedSquare.setStyle(Style.BLACK_SQUARE_SELECTED);
+			} else {
+				selectedSquare.setStyle(Style.WHITE_SQUARE_SELECTED);
 			}
+		} else if(selectedSquare != null){
+			
+			if(selectedSquare.getColor().equals("BLACK")) {
+				selectedSquare.setStyle(Style.BLACK_SQUARE);
+			} else {
+				selectedSquare.setStyle(Style.WHITE_SQUARE);
+			}
+			
+			if(selectedSquare.getPiece().isValidMove(selectedSquare.getRow(), selectedSquare.getCol(), 
+							square.getRow(), square.getCol())) {
+				square.setPiece(selectedSquare.removePiece());
+			}
+				
+			selectedSquare = null; // clear
 		}
 	}
 

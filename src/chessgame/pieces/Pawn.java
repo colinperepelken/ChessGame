@@ -14,8 +14,10 @@ public class Pawn extends Piece {
 		if(destCol == originCol) {
 			if(color == Color.BLACK) {
 				if((originRow + 1) == destRow) return true; // move 1 down on board
+				if(originRow == 1 && originRow + 2 == destRow) return true; // can move 2 for first move
 			} else if(color == Color.WHITE) {
 				if((originRow - 1) == destRow) return true; // move 1 up on board
+				if(originRow == 6 && originRow - 2 == destRow) return true; // can move 2 for first move
 			}
 		}
 
