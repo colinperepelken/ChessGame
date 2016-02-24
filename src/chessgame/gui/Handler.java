@@ -1,6 +1,5 @@
 package chessgame.gui;
 
-import chessgame.Rules;
 import chessgame.Square;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

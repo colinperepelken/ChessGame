@@ -15,7 +15,8 @@ public class GUI extends Application {
 	private static final String TITLE = "Chess Game";
 	
 	private GridPane root = new GridPane();
-
+	public static Square[][] board;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle(TITLE);
@@ -28,6 +29,7 @@ public class GUI extends Application {
 	}
 	
 	private void initBoard() {
+		board = new Square[8][8];
 		for(int row = 0; row < 8; row++) {
 			for(int col = 0; col < 8; col++) {
 				Square square = new Square(row, col);
@@ -52,6 +54,7 @@ public class GUI extends Application {
 				// add event handler to button
 				square.setOnAction(new Handler());
 				root.add(square, col, row);
+				board[row][col] = square; // store this square in array so it can be accessed without clicking on it
 			}
 		}
 	}
