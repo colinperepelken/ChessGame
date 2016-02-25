@@ -1,16 +1,19 @@
 package chessgame.gui;
 
 import chessgame.Square;
+import chessgame.pieces.King;
+import chessgame.pieces.Rook;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class Handler implements EventHandler<ActionEvent> {
 
 	private static Square origin = null;
+	private Square dest;
 	
 	@Override
 	public void handle(ActionEvent e) {
-		Square dest = (Square) e.getSource();
+		dest = (Square) e.getSource();
 		
 		// set origin square
 		if(origin == null && dest.isOccupied()) {
@@ -37,12 +40,12 @@ public class Handler implements EventHandler<ActionEvent> {
 				if(dest.getPiece() != null) {
 					// if there is a destination piece and it is not the same color as origin piece
 					if(origin.getPiece().getColor() != dest.getPiece().getColor()) {
-						executeMove(dest);
+						executeMove();
 					} else {
-						// do not move
+						checkForCastle(); // check if player is trying to castle
 					}
 				} else {
-					executeMove(dest); // if moving to an empty square then execute the move
+					executeMove(); // if moving to an empty square then execute the move
 				}
 			}
 				
@@ -50,10 +53,22 @@ public class Handler implements EventHandler<ActionEvent> {
 		}
 	}
 	
-	// check rules and attempt to execute a move
-	private void executeMove(Square dest) {
-		//if(Rules.checkPawnCapture(origin, dest)) {
+	// will check for and execute a player castling
+	private void checkForCastle() {
+		if(origin.getPiece() instanceof King && dest.getPiece() instanceof Rook) {
+			if(!((King)origin.getPiece()).hasMoved() && !((Rook)dest.getPiece()).hasMoved()) {
+				if(dest.getCol() > origin.getCol()) { // if castling to right
+					GUI.board[dest.getRow()][dest.getCol() - 1].setPiece(origin.removePiece());
+					GUI.board[origin.getRow()][origin.getCol() + 1].setPiece(dest.removePiece());
+				} else { // if castling to left
+					GUI.board[dest.getRow()][origin.getCol() - 2].setPiece(origin.removePiece());
+					GUI.board[origin.getRow()][origin.getCol() - 1].setPiece(dest.removePiece());
+				}
+			}
+		}
+	}
+	
+	private void executeMove() {
 			dest.setPiece(origin.removePiece());
-		//}
 	}
 }

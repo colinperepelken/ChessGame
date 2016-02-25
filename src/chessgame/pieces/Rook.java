@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Rook extends Piece {
-
+	private boolean moved = false;
+	
 	public Rook(Color color) {
 		super(color);
 	}
@@ -33,11 +34,15 @@ public class Rook extends Piece {
 				j--;
 				if(GUI.board[i][j].isOccupied()) return false;
 			}
-			
+			moved = true;
 			return true; // no pieces blocking path
 		}
 		
 		return false;
+	}
+	
+	public boolean hasMoved() {
+		return moved;
 	}
 
 	@Override
@@ -48,6 +53,4 @@ public class Rook extends Piece {
 			return loadImage("/res/rookw.png");
 		}
 	}
-
-	
 }
