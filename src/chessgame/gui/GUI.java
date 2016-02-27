@@ -4,7 +4,6 @@ import chessgame.Square;
 import chessgame.pieces.Piece;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
