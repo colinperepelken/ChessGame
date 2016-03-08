@@ -19,13 +19,23 @@ public class Bishop extends Piece {
 				i++;
 				if(j < destCol) j++;
 				else j--;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) {
+					if(i == destRow && GUI.board[i][j].getPiece().getColor() != this.getColor()) {
+						return true;
+					}
+					return false;
+				}
 			}
 			while(i > destRow) {
 				i--;
 				if(j < destCol) j++;
 				else j--;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) {
+					if(i == destRow && GUI.board[i][j].getPiece().getColor() != this.getColor()) {
+						return true;
+					}
+					return false;
+				}
 			}
 			return true; // no pieces blocking path
 		}

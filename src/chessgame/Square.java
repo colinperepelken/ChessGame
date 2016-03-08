@@ -16,8 +16,11 @@ public class Square extends Button{
 	
 	public void setPiece(Piece piece){
 		this.piece = piece;
-		if(piece != null)
+		if(piece != null) {
 			setGraphic(new ImageView(piece.getImage()));
+		} else {
+			setGraphic(null);
+		}
 	}
 	
 	public Piece getPiece() {

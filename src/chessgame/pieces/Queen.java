@@ -11,8 +11,8 @@ public class Queen extends Piece {
 
 	@Override
 	public boolean isValidMove(int originRow, int originCol, int destRow, int destCol) {
-		if(new Rook(Color.BLACK).isValidMove(originRow, originCol, destRow, destCol)
-				|| new Bishop(Color.BLACK).isValidMove(originRow, originCol, destRow, destCol)) {
+		if(new Rook(this.getColor()).isValidMove(originRow, originCol, destRow, destCol)
+				|| new Bishop(this.getColor()).isValidMove(originRow, originCol, destRow, destCol)) {
 			return true;
 		}
 		return false;

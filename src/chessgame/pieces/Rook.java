@@ -20,24 +20,31 @@ public class Rook extends Piece {
 			
 			while(i < destRow) {
 				i++;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) return checkIfTakingAnotherPiece(i, j, destRow, destCol);
 			}
 			while(i > destRow) {
 				i--;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) return checkIfTakingAnotherPiece(i, j, destRow, destCol);
 			}
 			while(j < destCol) {
 				j++;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) return checkIfTakingAnotherPiece(i, j, destRow, destCol);
 			}
 			while(j > destCol) {
 				j--;
-				if(GUI.board[i][j].isOccupied()) return false;
+				if(GUI.board[i][j].isOccupied()) return checkIfTakingAnotherPiece(i, j, destRow, destCol);
 			}
 			moved = true;
 			return true; // no pieces blocking path
 		}
 		
+		return false;
+	}
+	
+	private boolean checkIfTakingAnotherPiece(int i, int j, int destRow, int destCol) {
+		if(i == destRow && j == destCol && GUI.board[i][j].getPiece().getColor() != this.getColor()) {
+			return true;
+		}
 		return false;
 	}
 	

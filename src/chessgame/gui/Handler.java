@@ -2,9 +2,11 @@ package chessgame.gui;
 
 import chessgame.Square;
 import chessgame.pieces.King;
+import chessgame.pieces.Piece;
 import chessgame.pieces.Rook;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.paint.Color;
 
 public class Handler implements EventHandler<ActionEvent> {
 
@@ -68,7 +70,59 @@ public class Handler implements EventHandler<ActionEvent> {
 		}
 	}
 	
+	private boolean isKingInCheck(Color colorOfKing) {
+		// first find position of relevant king
+		int kingRow = 0, kingCol = 0;
+		for(int row = 0; row < 8; row++) {
+			for(int col = 0; col < 8; col++) {
+				if(GUI.board[row][col].isOccupied()) {
+					if(GUI.board[row][col].getPiece() instanceof King) {
+						if(GUI.board[row][col].getPiece().getColor() == colorOfKing) {
+							kingRow = row;
+							kingCol = col;
+						}
+					}
+				}
+			}
+		}
+		
+		// check if each piece of opposite color has a valid move to the king
+		for(int row = 0; row < 8; row++) {
+			for(int col = 0; col < 8; col++) {
+				Square s = GUI.board[row][col];
+				if(s.isOccupied()) {
+					if(colorOfKing != s.getPiece().getColor()) {
+						if(s.getPiece().isValidMove(row, col, kingRow, kingCol)) {
+							return true; // king is in check
+						}
+					}
+				}
+			}
+		}
+		return false; // king is not in check
+	}
+	
 	private void executeMove() {
-			dest.setPiece(origin.removePiece());
+		Piece p = null;
+		if(dest.isOccupied()) {
+			p = dest.getPiece(); // store piece in case move must be reverted
+		}
+
+		dest.setPiece(origin.removePiece());
+		if(isKingInCheck(dest.getPiece().getColor())) { // move must be reverted
+			System.out.println("Can't move there. King would be in check.");
+			origin.setPiece(dest.getPiece());
+			dest.setPiece(p);
+		} else {
+			if(dest.getPiece().getColor() == Color.BLACK) {
+				if(isKingInCheck(Color.WHITE)) {
+					System.out.println("Check");
+				}
+			} else {
+				if(isKingInCheck(Color.BLACK)) {
+					System.out.println("Check");
+				}
+			}
+		}
 	}
 }
